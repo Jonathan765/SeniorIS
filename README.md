@@ -36,3 +36,65 @@ ckks_param_tool/
 
 ```
 
+## Installation
+
+### 1. Clone the repository
+
+```bash
+
+git clone https://github.com/your-username/ckks-param-tool.git
+cd ckks-param-tool
+
+```
+
+### 2.  Creat a virtual environment
+
+```bash
+
+python3 -m venv venv
+source venv/bin/activate 
+
+```
+
+### 3. Install dependencies
+
+```bash
+
+pip install -r requirements.txt
+
+```
+
+## Example Usage
+
+The following example demonstrates how to run the CKKS parameter recommendation tool. The results will be printed to the terminal as well as written to the `results/` directory.
+
+```python
+
+from ckks_param_tool import Experiment
+from ckks_param_tool import client_server_split
+from ckks_param_tool import load_diabetes_data
+from ckks_param_tool import train_linear_regression_model
+
+from pathlib import Path
+import os
+
+# Load dataset
+X, y = load_diabetes_data()
+
+# Simulate client/server split
+X_client, X_server, y_client, y_server = client_server_split(X, y)
+
+# Train model on server-side data
+model = train_linear_regression_model(X_server, y_server)
+
+# Initialize experiment
+experiment = Experiment(X_client, model)
+
+# Run parameter selection and evaluation
+experiment.run(verbose=True)
+
+# Save results
+results_dir = Path("results")
+experiment.save(results_dir)
+
+```
