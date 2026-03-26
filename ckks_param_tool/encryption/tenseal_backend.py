@@ -3,7 +3,13 @@ import numpy as np
 from ckks_param_tool.encryption import CKKSBackend
 from ckks_param_tool.params import CKKSParams
 
+'''
+This file contains the encryption backend class used by the tool. It fully defines initialization, 
+and the operations of encryption and decryption using TenSEAL.
+'''
 class TenSEALBackend(CKKSBackend):
+    ciphertext_type = ts.CKKSVector
+
     def __init__(self, params: CKKSParams):
         self.params = params
         self.context = self._create_context()

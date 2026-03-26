@@ -1,3 +1,7 @@
+'''
+This file contains the abstract class that defines the machine learning model API used by the tool
+'''
+
 class BaseModel:
     def forward_plain(self, x):
         raise NotImplementedError

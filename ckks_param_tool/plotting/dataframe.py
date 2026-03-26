@@ -1,5 +1,9 @@
 import pandas as pd
 
+'''
+This file contains a helper function for the plotting functionality. It turns the dictionary
+output into a structured dataframe.
+'''
 def results_to_dataframe(results):
     rows = []
 
@@ -16,7 +20,9 @@ def results_to_dataframe(results):
             "max_err": metrics.error,
             "runtime": metrics.runtime,
             "security": metrics.security_bits,
-            "score": result[2],
+            "total_memory": params.memory["total"],
+            "status": metrics.status,
+            "failure_reason": metrics.failure_reason
         })
 
     return pd.DataFrame(rows)
